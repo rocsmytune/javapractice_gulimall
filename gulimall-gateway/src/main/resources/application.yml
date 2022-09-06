@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: ytb_route
+          uri: https://www.youtube.com
+          predicates:
+            - Query=url,ytb
+
+        - id: porn_route
+          uri: https://www.pornhub.com
+          predicates:
+            - Query=url,po
