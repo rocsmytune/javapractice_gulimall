@@ -12,6 +12,15 @@ spring:
           predicates:
             - Query=url,po
 
+
+        - id: product_route
+          uri: lb://gulimall-product
+          predicates:
+            - Path=/api/product/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
+
+
         - id: admin_route
           uri: lb://renren-fast
           predicates:
@@ -19,5 +28,9 @@ spring:
           filters:
             - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
 
+
+
 ## 前端项目，/api
+
 ## http://localhost:88/api/captcha.jpg ->  http://renren-fast:8080/renren-fast/captcha.jpg
+## http://localhost:88/api/product/category/list/tree
