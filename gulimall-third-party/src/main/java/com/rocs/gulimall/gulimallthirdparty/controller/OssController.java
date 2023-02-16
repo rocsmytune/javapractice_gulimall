@@ -5,6 +5,7 @@ import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.common.utils.BinaryUtil;
 import com.aliyun.oss.model.MatchMode;
 import com.aliyun.oss.model.PolicyConditions;
+import com.rocs.common.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,7 @@ public class OssController {
     private String accessId;
 
     @RequestMapping("/oss/policy")
-    public Map<String, String> policy() {
+    public R policy() {
 
         // 阿里云账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM用户进行API访问或日常运维，请登录RAM控制台创建RAM用户。
 //        String accessId = "yourAccessKeyId";
@@ -48,7 +49,7 @@ public class OssController {
 //        String callbackUrl = "https://192.168.0.0:8888";
         // 设置上传到OSS文件的前缀，可置空此项。置空后，文件将上传至Bucket的根目录下。
 
-        String mFormat = new SimpleDateFormat("yyyy-mm-dd").format(new Date());
+        String mFormat = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         String dir = mFormat + "/";
 
         // 创建ossClient实例。
@@ -81,6 +82,6 @@ public class OssController {
             System.out.println(e.getMessage());
         }
 
-        return respMap;
+        return R.ok().put("data", respMap);
     }
 }
