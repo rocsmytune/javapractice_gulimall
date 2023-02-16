@@ -1,0 +1,37 @@
+server:
+  port: 11909
+spring:
+  application:
+    name: gulimall-third-party
+
+#  #    mysql
+#  datasource:
+#    username: root
+#    password: root
+#    url: jdbc:mysql://10.211.55.8/gulimall-pms
+#    driver-class-name: com.mysql.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    alicloud:
+      access-key: LTAI5tNxTNSN6fMyoMxks1h7
+      secret-key: 6qp77OXNl5jZwPSB4kbZifAYchHBNF
+      oss:
+        endpoint: oss-eu-west-1.aliyuncs.com
+        bucket: javapractice-gulimall
+
+#  jackson:
+#    date-format: yyyy-MM-dd HH:mm:ss
+
+# mybatis-plus
+#mybatis-plus:
+#  global-config:
+#    db-config:
+#      id-type: auto
+#      logic-delete-value: 1
+#      logic-not-delete-value: 0
+#  mapper-locations: classpath:/mapper/**/*.xml
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
