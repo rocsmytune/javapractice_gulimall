@@ -1,10 +1,14 @@
 package com.rocs.gulimall.product.controller;
 
+import java.sql.ResultSet;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.BindResult;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +20,7 @@ import com.rocs.gulimall.product.service.BrandService;
 import com.rocs.common.utils.PageUtils;
 import com.rocs.common.utils.R;
 
+import javax.validation.Valid;
 
 
 /**
@@ -59,8 +64,21 @@ public class BrandController {
      */
     @RequestMapping("/save")
     //@RequiresPermissions("product:brand:save")
-    public R save(@RequestBody BrandEntity brand){
-		brandService.save(brand);
+    public R save(@Valid @RequestBody BrandEntity brand){
+//        if (bindResult.hasErrors()) {
+//            Map<String, String> emap = new HashMap<>();
+//
+//            bindResult.getFieldErrors().forEach((item)->{
+//                String msg = item.getDefaultMessage();
+//                String field = item.getField();
+//                emap.put(field, msg);
+//            });
+//
+//            return R.error(400, "提交的数据不合法").put("data", emap);
+//        } else {
+//
+//        }
+        brandService.save(brand);
 
         return R.ok();
     }

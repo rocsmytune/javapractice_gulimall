@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.FileNotFoundException;
 
 @SpringBootTest
 class GulimallProductApplicationTests {
@@ -14,13 +13,6 @@ class GulimallProductApplicationTests {
     @Autowired
     BrandService brandService;
 
-//    @Autowired
-//    OSSClient ossClient;
-
-//    @Test
-//    public void testUpload() throws FileNotFoundException {
-//        OSS oss
-//    }
 
     @Test
     void contextLoads() {

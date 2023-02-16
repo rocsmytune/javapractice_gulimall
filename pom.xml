@@ -19,7 +19,7 @@
         <module>renren-generator</module>
         <module>guimall-common</module>
         <module>gulimall-gateway</module>
-        <module>guilimall-third-party</module>
+        <module>gulimall-third-party</module>
     </modules>
 
 
