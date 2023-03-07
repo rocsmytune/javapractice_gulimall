@@ -2,6 +2,8 @@ package com.rocs.gulimall.product.service.impl;
 
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -55,6 +57,27 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 
         //logical delete
         baseMapper.deleteBatchIds(asList);
+    }
+
+    @Override
+    public Long[] findCatelogPath(Long catelogId) {
+        List<Long> path = new ArrayList<>();
+        List<Long> fullPath = findParentPath(catelogId, path);
+
+        Collections.reverse(fullPath);
+
+        return fullPath.toArray(new Long[fullPath.size()]);
+    }
+
+    private List<Long> findParentPath(Long catelogId, List<Long> path) {
+        path.add(catelogId);
+
+        CategoryEntity byId = this.getById(catelogId);
+
+        if (byId.getParentCid() != 0){
+            findParentPath(byId.getParentCid(), path);
+        }
+        return path;
     }
 
     //递归查找所有菜单的子菜单 recursively find the submenus of all menus
