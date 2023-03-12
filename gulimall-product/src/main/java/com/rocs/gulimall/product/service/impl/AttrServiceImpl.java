@@ -143,6 +143,7 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
         AttrEntity attrEntity = new AttrEntity();
         BeanUtils.copyProperties(attr, attrEntity); //将vo的值赋到po里
         this.save(attrEntity);
+        // 这里把原来的attr.get改成attrEntity.get修复了bug，推测原因：copyProperties类似剪切的功能
         Long nattrId = attrEntity.getAttrId();
 
         //保存关联关系
