@@ -1,22 +1,25 @@
 package com.rocs.gulimall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.rocs.gulimall.product.dao.AttrAttrgroupRelationDao;
+import com.rocs.gulimall.product.entity.AttrEntity;
+import com.rocs.gulimall.product.service.AttrAttrgroupRelationService;
+import com.rocs.gulimall.product.service.AttrService;
 import com.rocs.gulimall.product.service.CategoryService;
+import com.rocs.gulimall.product.vo.AttrGroupRelationVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.rocs.gulimall.product.entity.AttrGroupEntity;
 import com.rocs.gulimall.product.service.AttrGroupService;
 import com.rocs.common.utils.PageUtils;
 import com.rocs.common.utils.R;
 
+import javax.management.relation.RelationService;
 
 
 /**
@@ -35,6 +38,36 @@ public class AttrGroupController {
     @Autowired
     private  CategoryService categoryService;
 
+    @Autowired
+    private  AttrService attrService;
+
+    @Autowired
+    private AttrAttrgroupRelationService relationService;
+
+    @PostMapping("/attr/relation")
+    public R addAttrRelation(@RequestBody List<AttrGroupRelationVo> vos) {
+
+        relationService.saveBatch(vos);
+        return R.ok();
+    }
+
+    @GetMapping("/{attrgroupId}/attr/relation")
+    public R attrRelation(@PathVariable("attrgroupId") Long attrgroupId) {
+        List<AttrEntity> entities = attrService.getRelationAttr(attrgroupId);
+        return R.ok().put("data", entities);
+    }
+
+    @GetMapping("/{attrgroupId}/noattr/relation")
+    public R noattrRelation(@PathVariable("attrgroupId") Long attrgroupId, @RequestParam Map<String, Object> params) {
+        PageUtils page = attrService.getNoattrRelation(attrgroupId, params);
+        return R.ok().put("page", page);
+    }
+
+    @PostMapping("/attr/relation/delete")
+    public R deleteRelation(@RequestBody AttrGroupRelationVo[] vos) {
+        attrService.deleteRelation(vos);
+        return  R.ok();
+    }
 
     /**
      * 列表
