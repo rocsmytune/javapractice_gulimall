@@ -73,9 +73,6 @@ public class AttrGroupController {
     @GetMapping("/{catelogId}/withattr")
     public R getAttrGroupWithAttrs(@PathVariable("catelogId") Long catelogId) {
         //查出当前分类下得所有属性分组
-
-
-
         //查出每个属性分组的所有属性
         List<AttrGroupWithAttrsVo> vos = attrGroupService.getAttrGroupWithAttrsByCatelogId(catelogId);
         return R.ok().put("data",vos);
