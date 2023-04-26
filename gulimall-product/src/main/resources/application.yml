@@ -21,8 +21,8 @@ spring:
 #          endpoint: oss-eu-west-1.aliyuncs.com
 
 
-#  jackson:
-#    date-format: yyyy-MM-dd HH:mm:ss
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
 
 # mybatis-plus
 mybatis-plus:
